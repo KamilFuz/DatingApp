@@ -41,7 +41,8 @@ namespace API.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
 
-            return new UserDto{
+            return new UserDto
+            {
                 Username = user.UserName,
                 Token = _tokenService.CreateToken(user)
             };
@@ -63,7 +64,8 @@ namespace API.Controllers
                 if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid passsword!");
             }
 
-            return new UserDto{
+            return new UserDto
+            {
                 Username = user.UserName,
                 Token = _tokenService.CreateToken(user)
             };
@@ -73,6 +75,6 @@ namespace API.Controllers
         {
             return await _context.Users.AnyAsync(u => u.UserName == username.ToLower());
         }
-
+        
     }
 }
